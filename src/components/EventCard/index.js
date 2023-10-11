@@ -3,7 +3,7 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
-/* const EventCard = ({
+const EventCard = ({
   imageSrc,
   imageAlt,
   date = new Date(),
@@ -26,9 +26,9 @@ import "./style.scss";
         <div className="EventCard__month">{getMonth(date)}</div>
       </div>
     </div>
-  ); */
+  );
 
-const EventCard = ({
+/* const EventCard = ({
   imageSrc,
   imageAlt,
   date = new Date(),
@@ -60,13 +60,13 @@ const EventCard = ({
       </div>
     </div>
   );
-};
+}; */
 
 
 
 // BUGSORT
 EventCard.propTypes = {
-/*   imageSrc: PropTypes.string.isRequired,
+  /* imageSrc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired, */
   imageSrc: PropTypes.string,

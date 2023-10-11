@@ -4,7 +4,10 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
+
+
 const Slider = () => {
+  let time = null;
   const { data } = useData();
   const [index, setIndex] = useState(0);
   // Faire remonter by Date desc ou le réutiliser réécrire a chaque fois ?
@@ -12,18 +15,22 @@ const Slider = () => {
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-    setTimeout(
-      // BUGSORT from to
-      // setIndex(index < byDateDesc.length? index + 1 : 0)
-      // setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      2000
-    );
+    if (byDateDesc) {
+      time = setTimeout(
+        // BUGSORT from to
+        // setIndex(index < byDateDesc.length? index + 1 : 0)
+        // setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)
+        () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+        9000
+      );
+    }
+
   };
  /*  // eslint-disable-next-line
  console.log(byDateDesc.length) */
 
   useEffect(() => {
+    clearTimeout(time)
     nextCard();
   });
 
