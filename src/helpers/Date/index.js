@@ -12,6 +12,13 @@ export const MONTHS = {
   11: "novembre",
   12: "décembre",
 };
+// BUGSORT 
+// FROM : 
+// export const getMonth = (date) => MONTHS[date.getMonth()];
+// TO :
+// export const getMonth = (date) => MONTHS[date.getMonth() + 1];
+// La liste des mois commencais a 0 au lieu de 1 = décallage d'un mois et erreur sur le mois de janvier
+
 
 export const getMonth = (date) => MONTHS[date.getMonth() + 1];
 

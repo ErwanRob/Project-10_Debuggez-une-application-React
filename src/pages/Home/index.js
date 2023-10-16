@@ -1,30 +1,30 @@
-import Menu from "../../containers/Menu";
-import ServiceCard from "../../components/ServiceCard";
-import EventCard from "../../components/EventCard";
-import PeopleCard from "../../components/PeopleCard";
-
+/* import Menu from "../../containers/Menu"; */
 import "./style.scss";
-import EventList from "../../containers/Events";
+/* import ServiceCard from "../../components/ServiceCard"; */
+import EventCard from "../../components/EventCard";
+/* import PeopleCard from "../../components/PeopleCard";
+
+import EventList from "../../containers/Events"; */
 import Slider from "../../containers/Slider";
-import Logo from "../../components/Logo";
+/* import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
-import Modal from "../../containers/Modal";
+import Modal from "../../containers/Modal"; */
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { last } = useData()
   // eslint-disable-next-line
-  console.log(" Const LAST est égale à : ", last)
+  // console.log(" Const LAST est égale à : ", last)
   return <>
     <header>
-  <Menu />
+      {/* <Menu /> */}
     </header>
     <main>
       <section className="SliderContainer">
-   <Slider />
+        <Slider />
       </section>
-      <section className="ServicesContainer">
+      {/* <section className="ServicesContainer">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -92,10 +92,10 @@ const Page = () => {
             position="VP communication"
           />
         </div>
-      </section> 
-      <div className="FormContainer" id="contact">
+      </section> */}
+      {/* <div className="FormContainer" id="contact">
         <h2 className="Title">Contact</h2>
- <Modal
+        <Modal
           Content={
             <div className="ModalMessage--success">
               <div>Message envoyé !</div>
@@ -113,7 +113,7 @@ const Page = () => {
             />
           )}
         </Modal>
-      </div>
+      </div> */}
     </main>
     <footer className="row">
       <div className="col presta">
@@ -126,7 +126,7 @@ const Page = () => {
           label={last?.type}
         />
       </div>
-<div className="col contact">
+      {/* <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
         <div>01 23 45 67 89</div>
@@ -154,7 +154,7 @@ const Page = () => {
           tels que des événements festifs, des manifestations sportives et
           culturelles, des événements professionnels
         </p>
-      </div>
+      </div> */}
     </footer>
   </>
 }
