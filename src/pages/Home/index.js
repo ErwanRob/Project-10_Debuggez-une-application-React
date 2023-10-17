@@ -1,34 +1,39 @@
-/* import Menu from "../../containers/Menu"; */
+import Menu from "../../containers/Menu";
 import "./style.scss";
-/* import ServiceCard from "../../components/ServiceCard"; */
+import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
-/* import PeopleCard from "../../components/PeopleCard";
+import PeopleCard from "../../components/PeopleCard";
 
-import EventList from "../../containers/Events"; */
+import EventList from "../../containers/Events";
 import Slider from "../../containers/Slider";
-/* import Logo from "../../components/Logo";
+import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
-import Modal from "../../containers/Modal"; */
+import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
+
 const Page = () => {
-  const { last } = useData()
-  // eslint-disable-next-line
-  // console.log(" Const LAST est égale à : ", last)
+  // BUGSORT :
+  // replace const { last } = useData() by the following
+  // making it more clear to read and makes more sense
+
+  const { events } = useData()
+  const lastEvent = events?.[0];
+
   return <>
     <header>
-      {/* <Menu /> */}
+      <Menu />
     </header>
     <main>
       <section className="SliderContainer">
         <Slider />
       </section>
-      {/* <section className="ServicesContainer">
+      <section className="ServicesContainer">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
-       <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
+          <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
             <h3>Soirée d’entreprise</h3>
             Une soirée d’entreprise vous permet de réunir vos équipes pour un
             moment convivial afin de valoriser votre société en projetant une
@@ -57,7 +62,7 @@ const Page = () => {
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
-       <section className="PeoplesContainer">
+      <section className="PeoplesContainer">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -92,8 +97,8 @@ const Page = () => {
             position="VP communication"
           />
         </div>
-      </section> */}
-      {/* <div className="FormContainer" id="contact">
+      </section>
+      <div className="FormContainer" id="contact">
         <h2 className="Title">Contact</h2>
         <Modal
           Content={
@@ -113,20 +118,24 @@ const Page = () => {
             />
           )}
         </Modal>
-      </div> */}
+      </div>
     </main>
     <footer className="row">
-      <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
-          small
-          label={last?.type}
-        />
-      </div>
-      {/* <div className="col contact">
+      {/* BUGSORT lastEvent check for not undefined (security) */}
+      {lastEvent && (
+        <div className="col presta">
+          <h3>Notre derniére prestation</h3>
+          <EventCard
+            imageSrc={lastEvent.cover}
+            title={lastEvent.title}
+            date={new Date(lastEvent.date)}
+            small
+            label={lastEvent.type}
+          />
+        </div>
+      )}
+
+      <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
         <div>01 23 45 67 89</div>
@@ -154,7 +163,7 @@ const Page = () => {
           tels que des événements festifs, des manifestations sportives et
           culturelles, des événements professionnels
         </p>
-      </div> */}
+      </div>
     </footer>
   </>
 }

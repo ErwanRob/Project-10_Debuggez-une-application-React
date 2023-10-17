@@ -13,44 +13,48 @@ export const api = {
   loadData: async () => {
     const json = await fetch("/events.json");
     const data = await json.json();
-    // eslint-disable-next-line 
-    //console.log("Fetched Data:", data); // Log the fetched data to inspect its structure
     return data;
   },
 };
 
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-  // added last state for it to be set at the fetch)
-  // BUGSORT BEFORE : rien AFTER const [last, setLast] = useState(null);
-  const [last, setLast] = useState(); // Add a new state for the last event
-  // BUGSORT sorted data event list desc into sortEventsByDateDesc
-  const sortEventsByDateDesc = (events) => 
-  events.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date));
+  // BUGSORT Spreaded data into event and focus, added loading state.
+  const [events, setEvents] = useState([]);
+  const [focus, setFocus] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const sortEventsByDateDesc = (evt) =>
+    evt.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date));
 
   const getData = useCallback(async () => {
+    setIsLoading(true);
     try {
       const fetchedData = await api.loadData();
-      const sortedEvents = sortEventsByDateDesc(fetchedData.events);
-      setData({...fetchedData, events: sortedEvents});
-      setLast(sortedEvents[0]);
+      // BUGSORT
+      // Sort data if available otherwise sort an empty array to avoid unwanted resort
+      const sortedEvents = sortEventsByDateDesc(fetchedData?.events || []);
+      setFocus(fetchedData?.focus || [])
+      setEvents(sortedEvents || [])
+      setIsLoading(false);
     } catch (err) {
       setError(err);
+      setIsLoading(false);
     }
   }, []);
+
   useEffect(() => {
-    if (data) return;
+    if (focus.length && events.length) return;
     getData();
-  },[data, getData]);
-  
+  }, [focus.length, events.length]);
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        data,
+        events,
+        focus,
         error,
-        last,
+        isLoading,
       }}
     >
       {children}

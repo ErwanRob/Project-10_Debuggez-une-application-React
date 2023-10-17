@@ -15,10 +15,18 @@ const Form = ({ onSuccess, onError }) => {
       // We try to call mockContactApi
       try {
         await mockContactApi();
+        // BUGSORT FROM TO
+        // setSending(false)
+        // onSuccess(); setSending(false);
+        onSuccess();
         setSending(false);
+        // eslint-disable-next-line 
+        console.log('Passing by 1 - sucess sending')
       } catch (err) {
         setSending(false);
         onError(err);
+        // eslint-disable-next-line 
+        console.log('Passing by 2 - error sending')
       }
     },
     [onSuccess, onError]
